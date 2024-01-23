@@ -1,0 +1,21 @@
+﻿@page "/"
+@rendermode InteractiveAuto
+@inject apiService apiService
+@using STYLiSH.Model
+@using STYLiSH.Api
+
+<PageTitle>Home</PageTitle>
+
+<h1 class="text-orange-700 text-[40px] mb-[40px]">Hello, world!</h1>
+
+<Carousel/>
+
+Welcome to your new app.
+
+@code {
+  private ProductsSearch? productDetails;
+  protected override async Task OnInitializedAsync()
+  {
+    productDetails = await apiService.getProducts("all", 1);
+  }
+}

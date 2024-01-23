@@ -13,4 +13,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.1" />
   </ItemGroup>
 
+  <Import Project="StaticAssets\TailwindCli.targets" />
+  <Import Project="StaticAssets\TailwindNpm.targets" />
+
 </Project>
