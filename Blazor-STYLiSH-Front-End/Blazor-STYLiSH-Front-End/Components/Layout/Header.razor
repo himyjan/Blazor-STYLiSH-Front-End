@@ -1,14 +1,20 @@
 <div class="Wrapper">
   <a href="/" class="Logo"> </a>
   <div class="CategoryLinks">
-    <a class="CategoryLink" href="'/?category=' + category.name" *ngFor="let category of categories">{{
-      category.displayText }}</a>
+    @{
+      string[] categories = ["女裝","男裝","配件"];
+      string[] categories_name = ["women","men","accessories"];
+    }
+      @foreach (string category in categories)
+    {
+      <a class="CategoryLink" href="/?category=@categories_name">@category</a>
+    }
   </div>
   <input class="SearchInput" value="" #inputValue (keyup.enter)="search(inputValue.value)" />
   <div class="PageLinks">
     <a href="/checkout" class="PageLink">
       <div class="PageLinkCartIcon PageLinkIcon">
-        <div class="PageLinkIconNumber">{{ cartItems().length }}</div>
+        <div class="PageLinkIconNumber">0</div>
       </div>
       <div class="PageLinkText">購物車</div>
     </a>
