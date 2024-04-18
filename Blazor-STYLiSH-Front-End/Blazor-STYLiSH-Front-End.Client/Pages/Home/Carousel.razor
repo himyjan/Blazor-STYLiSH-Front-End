@@ -1,0 +1,73 @@
+@rendermode InteractiveAuto
+@using STYLiSH.Model;
+
+@if (data != null)
+{
+  <div class="Wrapper">
+  @for (var i = 0; i < data.data.Length; i++)
+    {
+      <a href="/products/@data.data[i].product_id" class="Campaign"
+        style='opacity: @(i == activeCampaignIndex ? 1 : 0); background-image: url("@data.data[i].picture");'>
+        <div class="Story">
+          <div class="StoryContent">
+            @data.data[i].story.Substring(data.data[i].story.IndexOf("\r\n") + 1)
+          </div>
+          <div class="StoryTitle">
+            @data.data[i].story.Split("\r\n")[3]
+          </div>
+        </div>
+      </a>
+      }
+    <div class="Dots">
+       @for (var i = 0; i < data.data.Length; i++)
+      {
+        <div class="Dot" style='background-color: @(i == activeCampaignIndex ? "#8b572a" : "white");'>
+        </div>
+      }
+    </div>
+  </div>
+}
+else
+{
+  <p>Loading data...</p>
+}
+
+@code {
+  public MarketingCampaigns data;
+  public HttpClient httpClient = new HttpClient();
+
+  public async Task FetchData()
+  {
+    data = await
+    httpClient.GetFromJsonAsync<MarketingCampaigns>("https://api.appworks-school.tw/api/1.0/marketing/campaigns");
+  }
+
+  protected override async Task OnInitializedAsync()
+  {
+    await FetchData();
+  }
+
+  private System.Timers.Timer timer;
+  private int activeCampaignIndex = 0;
+
+  [Parameter] public int Interval { get; set; } = 5000;
+
+  protected override void OnInitialized()
+  {
+    base.OnInitialized();
+    timer = new(Interval);
+    timer.Elapsed += (sender, eventArgs) => OnTimerCallback();
+    timer.Start();
+  }
+
+  private void OnTimerCallback()
+  {
+    _ = InvokeAsync(() =>
+    {
+      activeCampaignIndex++;
+      if (activeCampaignIndex >= data.data.Length)
+        activeCampaignIndex = 0;
+      StateHasChanged();
+    });
+  }
+}

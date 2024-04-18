@@ -1,0 +1,25 @@
+<div class="Wrapper">
+  <div class="Content">
+    <div class="SiteLinks">
+      @{
+        string[] texts = ["關於 Stylish", "服務條款", "隱私政策", "聯絡我們", "FAQ"];
+      }
+      @foreach (string text in texts)
+      {
+        <div class="SiteLink">
+          @text
+        </div>
+      }
+    </div>
+    <div class="SocialLinks">
+      @{
+        string[] icons = ["line", "twitter", "facebook"];
+      }
+      @foreach (string icon in icons)
+      {
+        <div class="SocialLink" style='background-image: url("images/@(icon).png");'></div>
+      }
+    </div>
+    <div class="Copywright">© 2023. All rights reserved.</div>
+  </div>
+</div>

@@ -1,9 +1,12 @@
 using Blazor_STYLiSH_Front_End.Components;
+using STYLiSH.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddScoped<apiService>();
+
 // Add services to the container.
-builder.Services.AddRazorComponents()
+builder.Services.AddHttpClient().AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
 

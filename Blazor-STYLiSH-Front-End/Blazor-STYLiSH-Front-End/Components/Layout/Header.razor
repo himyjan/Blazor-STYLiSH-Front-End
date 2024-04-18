@@ -1,0 +1,20 @@
+<div class="Wrapper">
+  <a href="/" class="Logo"> </a>
+  <div class="CategoryLinks">
+    <a class="CategoryLink" href="'/?category=' + category.name" *ngFor="let category of categories">{{
+      category.displayText }}</a>
+  </div>
+  <input class="SearchInput" value="" #inputValue (keyup.enter)="search(inputValue.value)" />
+  <div class="PageLinks">
+    <a href="/checkout" class="PageLink">
+      <div class="PageLinkCartIcon PageLinkIcon">
+        <div class="PageLinkIconNumber">{{ cartItems().length }}</div>
+      </div>
+      <div class="PageLinkText">購物車</div>
+    </a>
+    <a href="/profile" class="PageLink">
+      <div class="PageLinkProfileIcon PageLinkIcon"></div>
+      <div class="PageLinkText">會員</div>
+    </a>
+  </div>
+</div>

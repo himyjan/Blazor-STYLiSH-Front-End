@@ -1,0 +1,90 @@
+@rendermode InteractiveAuto
+@inject apiService apiService
+@using STYLiSH.Model
+@using STYLiSH.Api
+
+@if (products != null)
+{
+    <div class="Wrapper">
+        @foreach (var product in products)
+        {
+            <a class="Product" href="/products/@product.id">
+                <img src="@product.main_image" class="ProductImage" /> 
+                <div class="ProductColors">
+                    @foreach (var color in product.colors!)
+                    {
+                        <div class="ProductColor" style='background-color: #@color.code'>
+                        </div>
+                    }
+                </div>
+                <div class="ProductTitle">@product.title</div>
+                <div class="ProductPrice">TWD.@product.price</div>
+            </a>
+        }
+    </div>
+}
+else
+{
+  <p>Loading data...</p>
+}
+
+@code {
+    List<ProductDetailsData> products = new List<ProductDetailsData>();
+    bool IsLoading = false;
+    string Keyword = "";
+    string Category = "all";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await ExecuteSideEffect();
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await ExecuteSideEffect();
+    }
+
+    private async Task ExecuteSideEffect()
+    {
+        int? nextPaging = 0;
+        bool isFetching = false;
+
+        async Task Fetchproducts()
+        {
+            isFetching = true;
+            IsLoading = true;
+            ProductsSearch response = string.IsNullOrEmpty(Keyword)
+                ? await apiService.getProducts(Category, nextPaging ?? 0)
+                : await apiService.searchProducts(Keyword, nextPaging ?? 0);
+            if (nextPaging == 0)
+            {
+                products = response.data!;
+            }
+            else
+            {
+                products.AddRange(response.data!);
+            }
+            nextPaging = response.next_paging ?? 0;
+            isFetching = false;
+            IsLoading = false;
+        }
+
+        @* async Task ScrollHandler()
+        {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight)
+            {
+                if (nextPaging == null) return;
+                if (isFetching) return;
+
+                await Fetchproducts();
+            }
+        } *@
+
+        await Fetchproducts();
+
+        @* window.addEventListener("scroll", ScrollHandler); *@
+
+        // Dispose the event listener when the component is disposed
+        @* DisposeEventListeners += () => window.removeEventListener("scroll", ScrollHandler); *@
+    }
+}
