@@ -33,7 +33,7 @@ else
 }
 
 @code {
-  public MarketingCampaigns data;
+  public MarketingCampaigns? data;
   public HttpClient httpClient = new HttpClient();
 
   public async Task FetchData()
@@ -65,7 +65,7 @@ else
     _ = InvokeAsync(() =>
     {
       activeCampaignIndex++;
-      if (activeCampaignIndex >= data.data.Length)
+      if (activeCampaignIndex >= (data?.data.Length ?? 0))
         activeCampaignIndex = 0;
       StateHasChanged();
     });

@@ -53,18 +53,18 @@ else
         {
             isFetching = true;
             IsLoading = true;
-            ProductsSearch response = string.IsNullOrEmpty(Keyword)
+            ProductsSearch? response = string.IsNullOrEmpty(Keyword)
                 ? await apiService.getProducts(Category, nextPaging ?? 0)
                 : await apiService.searchProducts(Keyword, nextPaging ?? 0);
             if (nextPaging == 0)
             {
-                products = response.data!;
+                products = response?.data!;
             }
             else
             {
-                products.AddRange(response.data!);
+                products.AddRange(response?.data!);
             }
-            nextPaging = response.next_paging ?? 0;
+            nextPaging = response?.next_paging ?? 0;
             isFetching = false;
             IsLoading = false;
         }

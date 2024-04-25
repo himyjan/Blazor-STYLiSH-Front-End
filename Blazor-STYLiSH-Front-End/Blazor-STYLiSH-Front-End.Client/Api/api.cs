@@ -16,7 +16,7 @@ namespace STYLiSH.Api
 
     public async Task<ProductsSearch?> getProducts(string category, int paging)
     {
-      ProductsSearch data = await
+      ProductsSearch? data = await
       httpClient.GetFromJsonAsync<ProductsSearch>($"{hostname}/products/{category}?paging={paging}");
       return data;
     }
