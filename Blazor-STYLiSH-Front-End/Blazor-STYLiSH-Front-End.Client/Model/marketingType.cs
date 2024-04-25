@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace STYLiSH.Model
 {
-  public class CarouselDetails
+  public record CarouselDetails
   {
     public int id { get; set; }
     [JsonConverter(typeof(LongToStringConverter))]
@@ -12,7 +12,7 @@ namespace STYLiSH.Model
     public required string story { get; set; }
   }
 
-  public class MarketingCampaigns
+  public record MarketingCampaigns
   {
     public required CarouselDetails[] data { get; set; }
   }

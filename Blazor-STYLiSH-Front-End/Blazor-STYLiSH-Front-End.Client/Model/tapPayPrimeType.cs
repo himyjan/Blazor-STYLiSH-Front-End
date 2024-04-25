@@ -1,6 +1,6 @@
 namespace STYLiSH.Model
 {
-  public class Card
+  public record Card
   {
     public string? prime { get; set; }
     public string? bincode { get; set; }
@@ -15,12 +15,12 @@ namespace STYLiSH.Model
     public string? countrycode { get; set; }
   }
 
-  public class Affiliate_codes
+  public record Affiliate_codes
   {
     public string[]? affiliate_codes { get; set; }
   }
 
-  public class Prime
+  public record Prime
   {
     public int status { get; set; }
     public Card? card { get; set; }

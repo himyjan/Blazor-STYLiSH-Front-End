@@ -1,6 +1,6 @@
 namespace STYLiSH.Model
 {
-  public class Profile
+  public record Profile
   {
     public string? email { get; set; }
     public int id { get; set; }

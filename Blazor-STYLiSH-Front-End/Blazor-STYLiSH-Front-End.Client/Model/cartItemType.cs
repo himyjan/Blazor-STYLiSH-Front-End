@@ -1,12 +1,12 @@
 namespace STYLiSH.Model
 {
-  public class Color
+  public record Color
   {
     public string? code { get; set; }
     public string? name { get; set; }
   }
 
-  public class CartItem
+  public record CartItem
   {
     public string? id { get; set; }
     public Color? color { get; set; }

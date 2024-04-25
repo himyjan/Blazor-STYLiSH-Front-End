@@ -1,6 +1,6 @@
 namespace STYLiSH.Model
 {
-  public class State
+  public record State
   {
     public int orderNumber { get; set; }
   }

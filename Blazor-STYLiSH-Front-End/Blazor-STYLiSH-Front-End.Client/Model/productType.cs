@@ -8,14 +8,14 @@ namespace STYLiSH.Model
     Xl = 'X' + 'L'
   }
 
-  public class Variant
+  public record Variant
   {
     public string? color_code { get; set; }
     public string? size { get; set; }
     public int stock { get; set; }
   }
 
-  public class ProductDetailsData
+  public record ProductDetailsData
   {
     public long id { get; set; }
     public string? category { get; set; }
@@ -34,13 +34,13 @@ namespace STYLiSH.Model
     public List<string>? sizes { get; set; }
   }
 
-  public class ProductsSearch
+  public record ProductsSearch
   {
     public List<ProductDetailsData>? data { get; set; }
     public int? next_paging { get; set; }
   }
 
-  public class ProductDetails
+  public record ProductDetails
   {
     public ProductDetailsData? data { get; set; }
   }

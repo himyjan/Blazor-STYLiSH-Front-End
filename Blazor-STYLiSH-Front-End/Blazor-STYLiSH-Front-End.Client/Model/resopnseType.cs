@@ -1,11 +1,11 @@
 namespace STYLiSH.Model
 {
-  public class AuthResponse
+  public record AuthResponse
   {
     public string? accessToken { get; set; }
   }
 
-  public class Response
+  public record Response
   {
     public AuthResponse? authResponse { get; set; }
     public string? status { get; set; }
